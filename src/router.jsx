@@ -1,6 +1,6 @@
 import React from 'react'
 import {HashRouter,Route, Switch,Redirect} from 'react-router-dom';
-import App from './App.js'
+import App from './App.jsx'
 import Home from './pages/home/index'
 import NotFound from './pages/notFound/index'
 export default class Router extends React.Component{

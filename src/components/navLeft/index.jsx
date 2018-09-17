@@ -1,61 +1,53 @@
-import React from 'react';
-import { Menu, Icon, Button } from 'antd';
+import React from "react";
+import { Layout, Menu, Icon, Card, Avatar } from "antd";
+import "./index.less";
 
-const SubMenu = Menu.SubMenu;
-
-class Header extends React.Component {
+const { Sider } = Layout;
+class NavLeft extends React.Component {
   state = {
-    collapsed: false,
-  }
-
-  toggleCollapsed = () => {
-    this.setState({
-      collapsed: !this.state.collapsed,
-    });
-  }
+    menu: ["首页", "归档", "标签", "关于我", "留言板"]
+  };
+  handleClickMenu = ({ key }) => {
+    const { onClickMenu } = this.props;
+    onClickMenu(key);
+  };
 
   render() {
     return (
-      <div style={{ width: 256 }}>
-        <Button type="primary" onClick={this.toggleCollapsed} style={{ marginBottom: 16 }}>
-          <Icon type={this.state.collapsed ? 'menu-unfold' : 'menu-fold'} />
-        </Button>
+      <Sider trigger={null} collapsible collapsed={false} className="navLeft">
+        <div className="avatarCard">
+          <img src="http://test.jgchen.xin/static/images/1.jpg" alt="" />
+        </div>
         <Menu
-          defaultSelectedKeys={['1']}
-          defaultOpenKeys={['sub1']}
-          mode="inline"
           theme="light"
-          inlineCollapsed={this.state.collapsed}
+          mode="inline"
+          defaultSelectedKeys={[this.props.activeKey]}
+          onClick={this.handleClickMenu}
         >
+          <Menu.Item key="0">
+            <Icon type="home" />
+            <span>首页</span>
+          </Menu.Item>
           <Menu.Item key="1">
-            <Icon type="pie-chart" />
-            <span>Option 1</span>
+            <Icon type="hourglass" />
+            <span>归档</span>
           </Menu.Item>
           <Menu.Item key="2">
-            <Icon type="desktop" />
-            <span>Option 2</span>
+            <Icon type="tags" />
+            <span>标签</span>
           </Menu.Item>
           <Menu.Item key="3">
-            <Icon type="inbox" />
-            <span>Option 3</span>
+            <Icon type="user" />
+            <span>关于我</span>
           </Menu.Item>
-          <SubMenu key="sub1" title={<span><Icon type="mail" /><span>Navigation One</span></span>}>
-            <Menu.Item key="5">Option 5</Menu.Item>
-            <Menu.Item key="6">Option 6</Menu.Item>
-            <Menu.Item key="7">Option 7</Menu.Item>
-            <Menu.Item key="8">Option 8</Menu.Item>
-          </SubMenu>
-          <SubMenu key="sub2" title={<span><Icon type="appstore" /><span>Navigation Two</span></span>}>
-            <Menu.Item key="9">Option 9</Menu.Item>
-            <Menu.Item key="10">Option 10</Menu.Item>
-            <SubMenu key="sub3" title="Submenu">
-              <Menu.Item key="11">Option 11</Menu.Item>
-              <Menu.Item key="12">Option 12</Menu.Item>
-            </SubMenu>
-          </SubMenu>
+          <Menu.Item key="4">
+            <Icon type="edit" />
+            <span>留言板</span>
+          </Menu.Item>
+          <Menu.Item />
         </Menu>
-      </div>
+      </Sider>
     );
   }
 }
-export default Header;
+export default NavLeft;

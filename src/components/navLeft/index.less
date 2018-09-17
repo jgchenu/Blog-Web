@@ -1,0 +1,27 @@
+@import './../../styles/vars.less';
+.navLeft {
+    background-color: #ffffff;
+    padding: 0;
+    border-radius: 20px;
+    margin: 20px 0px 20px 20px;
+    border: 1px solid @borderColor;
+    box-shadow: 0 0 2px #eeeeee;
+
+    .avatarCard {
+        text-align: center;
+        height: 128px;
+        border-bottom: 1px solid @borderColor;
+        line-height: 128px;
+        img {
+            height: 80px;
+            width: 80px;
+            vertical-align: middle;
+            border-radius: 50%;
+            transition: all .5s;
+            border: 1px solid @borderColor;
+        }
+        img:hover {
+            box-shadow: 0 0 10px #bbbbbb;
+        }
+    }
+}

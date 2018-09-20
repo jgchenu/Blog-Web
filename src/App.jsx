@@ -2,7 +2,7 @@ import React from "react";
 import { Layout } from "antd";
 import NavLeft from "./components/navLeft/index";
 import MyHeader from "./components/header/index";
-import './App.less'
+import './styles/App.less'
 const { Content } = Layout;
 
 class App extends React.Component {

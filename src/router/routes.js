@@ -22,5 +22,8 @@ export default [{
         path: "/messageBoard",
         title: "留言板",
         iconType: 'edit'
+    }, {
+        path: '/detail',
+        title: '详情'
     }
 ]

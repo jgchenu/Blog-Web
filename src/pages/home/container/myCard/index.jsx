@@ -1,46 +1,22 @@
 import React from "react";
-import { Card, Tag } from "antd";
+import { Card } from "antd";
 import "./index.less";
+import history from './../../../../router/history'
+import MyTag from './../../../../components/myTag/index'
 export default class MyCard extends React.Component {
-  tagColors = [
-    "magenta",
-    "red",
-    "volcano",
-    "orange",
-    "gold",
-    "lime",
-    "green",
-    "cyan",
-    "blue",
-    "geekblue",
-    "purple"
-  ];
 
-  state = {
-    
-  };
+  goDetail(id){
+    history.push(`/detail/${id}`)
+  }
   render() {
+    let list = this.props.list;
     return (
-      <div>
-        <Card
-          title="我是一个大傻逼"
-          style={{ width: "100%" }}
-          className="myCard"
-        >
-          <div className="content">我是一个大傻逼，大傻逼，大傻逼</div>
+      <div className='myCard' onClick={this.goDetail.bind(this,list.id)}>
+        <Card title={list.title} style={{ width: "100%" }} >
+          <div className="content">{list.title}</div>
           <footer className="cardFooter">
             <div className="tags">
-              <Tag color="magenta">magenta</Tag>
-              <Tag color="red">red</Tag>
-              <Tag color="volcano">volcano</Tag>
-              <Tag color="orange">orange</Tag>
-              <Tag color="gold">gold</Tag>
-              <Tag color="lime">lime</Tag>
-              <Tag color="green">green</Tag>
-              <Tag color="cyan">cyan</Tag>
-              <Tag color="blue">blue</Tag>
-              <Tag color="geekblue">geekblue</Tag>
-              <Tag color="purple">purple</Tag>
+            <MyTag tags={list.tags}></MyTag>
             </div>
           </footer>
         </Card>

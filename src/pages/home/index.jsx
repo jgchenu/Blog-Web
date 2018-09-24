@@ -1,12 +1,17 @@
 import React from "react";
 import "./index.less";
 import MyCard from "./container/myCard";
+import api from "../../mockApi/homeList";
 class Home extends React.Component {
-  state = {};
+  state = {
+    indexList: api
+  };
   render() {
     return (
       <div className="home">
-        <MyCard />
+        {this.state.indexList.map((item, index) => (
+          <MyCard list={item} key={index} />
+        ))}
       </div>
     );
   }

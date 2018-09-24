@@ -6,7 +6,7 @@ import Archive from "../pages/archive/index";
 import Tags from "../pages/tags/index";
 import AboutMe from "../pages/aboutMe/index";
 import MessageBoard from "../pages/messageBoard/index";
-
+import Detail from '../pages/detail/index'
 import NotFound from "../pages/notFound/index";
 import history from "./history";
 export default class MyRouter extends React.Component {
@@ -24,6 +24,7 @@ export default class MyRouter extends React.Component {
                   <Route path="/tags" component={Tags} />
                   <Route path="/aboutMe" component={AboutMe} />
                   <Route path="/messageBoard" component={MessageBoard} />
+                  <Route path='/detail/:id' component={Detail}/>
                   <Redirect to="/home" />
                   <Route component={NotFound} />
                 </Switch>

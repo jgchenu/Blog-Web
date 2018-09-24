@@ -9,7 +9,8 @@ class NavLeft extends React.Component {
     history.push(key);
   };
   returnItems = () => {
-    return routes.map(item => (
+    let routeMenus = routes.slice(0, 5);
+    return routeMenus.map(item => (
       <Menu.Item key={item.path}>
         <Icon type={item.iconType} />
         <span>{item.title}</span>

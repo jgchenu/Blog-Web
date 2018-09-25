@@ -1,6 +1,6 @@
 import React from "react";
 import { Tag } from "antd";
-
+import './index.less'
 class MyTag extends React.Component {
   tagColors = [
     "magenta",

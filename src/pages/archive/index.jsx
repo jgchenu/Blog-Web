@@ -1,20 +1,26 @@
 import React from "react";
-import { Timeline } from "antd";
-import './index.less'
+import { Timeline,Icon } from "antd";
+import "./index.less";
+import api from "@/mockApi/homeList";
+import history from '@/router/history'
+
 class Archive extends React.Component {
-  state = {};
+  state = { indexList: api };
+  renderTimeItem=()=>{
+    return (
+      this.state.indexList.map((item,index)=>(
+        <Timeline.Item key={index} onClick={this.goDetail.bind(this,item.id-1)} dot={<Icon type="clock-circle-o" style={{ fontSize: '16px' }} />} color="blue">{item.title}</Timeline.Item>
+      ))
+    )
+  }
+  goDetail(id){
+    history.push(`/detail/${id}`)
+  }
   render() {
     return (
-      <div className='archive'>
-        <Timeline>
-          <Timeline.Item>你是傻子吗</Timeline.Item>
-          <Timeline.Item>
-            你应该不是傻子吧
-          </Timeline.Item>
-          <Timeline.Item>我是傻子吧</Timeline.Item>
-          <Timeline.Item>
-           我肯定不是傻子
-          </Timeline.Item>
+      <div className="archive">
+        <Timeline mode="alternate">
+            {this.renderTimeItem()}
         </Timeline>
       </div>
     );

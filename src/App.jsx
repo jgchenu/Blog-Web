@@ -1,9 +1,9 @@
 import React from "react";
-import { Layout } from "antd";
+import { Layout, BackTop, Icon } from "antd";
 import NavLeft from "./components/navLeft/index";
 import MyHeader from "./components/header/index";
 import "./styles/App.less";
-const { Content,Sider } = Layout;
+const { Content, Sider } = Layout;
 
 class App extends React.Component {
   state = {};
@@ -16,7 +16,14 @@ class App extends React.Component {
         </Sider>
         <Layout className="right">
           <MyHeader />
-          <Content className="content">{this.props.children}</Content>
+          <Content className="content">
+            {this.props.children}
+            <BackTop>
+              <div className="ant-back-top-inner">
+                <Icon type="caret-up" theme="outlined" />
+              </div>
+            </BackTop>
+          </Content>
         </Layout>
       </Layout>
     );

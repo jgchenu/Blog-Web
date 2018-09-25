@@ -1,0 +1,28 @@
+@import "~@/styles/vars.less";
+.mobileHeader {
+    position: relative;
+    .showIcon {
+        position: absolute;
+        font-size: 2rem;
+        right: 1rem;
+        top: 1rem;
+    }
+    .avatarCard {
+        text-align: center;
+        height: 128px;
+        border-bottom: 1px solid @borderColor;
+        line-height: 128px;
+        background-color: #fff;
+        img {
+            height: 80px;
+            width: 80px;
+            vertical-align: middle;
+            border-radius: 50%;
+            transition: all 0.5s;
+            border: 1px solid @borderColor;
+        }
+        img:hover {
+            box-shadow: 0 0 10px #bbbbbb;
+        }
+    }
+}

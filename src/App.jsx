@@ -3,6 +3,7 @@ import { Layout, BackTop, Icon } from "antd";
 import NavLeft from "./components/navLeft/index";
 import MyHeader from "./components/header/index";
 import "./styles/App.less";
+import MHeader from "@/components/mHeader";
 const { Content, Sider } = Layout;
 
 class App extends React.Component {
@@ -15,6 +16,9 @@ class App extends React.Component {
           <NavLeft />
         </Sider>
         <Layout className="right">
+          <div className="mHeader">
+            <MHeader />
+          </div>
           <MyHeader />
           <Content className="content">
             {this.props.children}

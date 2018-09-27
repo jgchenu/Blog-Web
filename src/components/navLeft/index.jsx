@@ -26,7 +26,7 @@ class NavLeft extends React.Component {
         <Menu
           theme="light"
           mode="inline"
-          defaultSelectedKeys={[history.location.pathname]}
+          defaultSelectedKeys={['/home']}
           onClick={this.handleClickMenu}
         >
           {this.returnItems()}

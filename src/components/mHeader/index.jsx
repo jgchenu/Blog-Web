@@ -32,7 +32,8 @@ class NavLeft extends React.Component {
           type={this.state.show ? "up-circle" : "down-circle"}
           theme="twoTone"
           twoToneColor="#4fc3f7"
-          className="showIcon"
+          // className="showIcon"
+          style={{ fontSize: 30, marginRight: 20,position:'absolute',right:'.6rem',top:'1.5rem'}}
           onClick={this.handleClickShow.bind(this)}
         />
 

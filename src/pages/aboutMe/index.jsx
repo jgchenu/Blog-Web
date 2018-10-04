@@ -1,14 +1,33 @@
 import React from "react";
-class Archive extends React.Component {
-  state = {};
+import api from "@/api";
+const { person } = api;
+class User extends React.Component {
+  state = { content: "" };
+  componentWillMount() {
+    this.loadData();
+  }
+  loadData = () => {
+    this.$axios({
+      url: person,
+      method: "get"
+    }).then(res => {
+      if (res.data.code === 200) {
+        this.setState({
+          content: res.data.data.introduction
+        });
+      }
+    });
+  };
   render() {
     return (
       <div>
-        关于我
-        <p>我是jgchen，陈小光</p>
+        <div
+          className="personMessage"
+          dangerouslySetInnerHTML={{ __html: this.state.content }}
+        />
       </div>
     );
   }
 }
 
-export default Archive;
+export default User;

@@ -1,6 +1,8 @@
 const api = {
     article: '/article',
     tag: '/tag',
-    archive:'/archive'
+    archive:'/archive',
+    person:'/person'
+
 }
 export default api;

@@ -5,7 +5,6 @@ import history from "../../router/history";
 import routes from "../../router/routes";
 class NavLeft extends React.Component {
   handleClickMenu = ({ key }) => {
-    console.log(key);
     history.push(key);
   };
   returnItems = () => {

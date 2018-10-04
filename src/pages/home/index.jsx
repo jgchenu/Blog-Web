@@ -1,11 +1,35 @@
 import React from "react";
 import "./index.less";
 import MyCard from "./container/myCard";
-import api from "@/mockApi/homeList";
-import { Pagination, } from "antd";
-class Home extends React.Component {
+import api from "@/api";
+import { Pagination } from "antd";
+const { article } = api;
+class Article extends React.Component {
   state = {
-    indexList: api
+    indexList: [],
+    allCount:0
+  };
+  componentWillMount() {
+    this.loadData()
+  }
+  loadData = (page = 1, pageSize = 10) => {
+    this.$axios({
+      url: article,
+      method: "get",
+      params: {
+        page,
+        pageSize
+      }
+    }).then(res => {
+      console.log(res)
+      this.setState({
+        indexList: res.data.data,
+        allCount:res.data.count
+      });
+    });
+  };
+  onChange = (page, pageSize) => {
+    this.loadData(page,pageSize)
   };
   render() {
     return (
@@ -16,11 +40,11 @@ class Home extends React.Component {
           ))}
         </div>
         <div className="footer">
-          <Pagination defaultCurrent={6} total={500} />
+          <Pagination defaultCurrent={1} total={this.state.allCount} onChange={this.onChange} />
         </div>
       </div>
     );
   }
 }
 
-export default Home;
+export default Article;

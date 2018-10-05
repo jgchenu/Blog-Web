@@ -1,5 +1,5 @@
 import React from "react";
-import api from "@/api";
+import api from "@/lib/api";
 const { person } = api;
 class User extends React.Component {
   state = { content: "" };

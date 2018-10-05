@@ -25,5 +25,10 @@ export default [{
     }, {
         path: '/detail',
         title: '详情'
+    },
+    {
+        path: "/tagArticle",
+        title: "标签文章",
+        iconType: 'hourglass',
     }
 ]

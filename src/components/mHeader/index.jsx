@@ -8,7 +8,9 @@ class NavLeft extends React.Component {
     show: true
   };
   handleClickMenu = ({ key }) => {
-    console.log(key);
+    if (key === "/home") {
+      sessionStorage.setItem("page", 1);
+    }
     history.push(key);
   };
   returnItems = () => {
@@ -33,11 +35,17 @@ class NavLeft extends React.Component {
           theme="twoTone"
           twoToneColor="#4fc3f7"
           // className="showIcon"
-          style={{ fontSize: 30, marginRight: 20,position:'absolute',right:'.6rem',top:'1.5rem'}}
+          style={{
+            fontSize: 30,
+            marginRight: 20,
+            position: "absolute",
+            right: ".6rem",
+            top: "1.5rem"
+          }}
           onClick={this.handleClickShow.bind(this)}
         />
 
-        <div   style={{ display: this.state.show ? "block" : "none" }}>
+        <div style={{ display: this.state.show ? "block" : "none" }}>
           <div className="avatarCard">
             <img src="http://test.jgchen.xin/static/images/1.jpg" alt="" />
           </div>
@@ -46,7 +54,6 @@ class NavLeft extends React.Component {
             mode="inline"
             defaultSelectedKeys={[history.location.pathname]}
             onClick={this.handleClickMenu}
-          
           >
             {this.returnItems()}
           </Menu>

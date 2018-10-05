@@ -5,6 +5,9 @@ import history from "../../router/history";
 import routes from "../../router/routes";
 class NavLeft extends React.Component {
   handleClickMenu = ({ key }) => {
+    if (key === "/home") {
+      sessionStorage.setItem("page", 1);
+    }
     history.push(key);
   };
   returnItems = () => {

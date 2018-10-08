@@ -8,6 +8,7 @@ class MyHeader extends React.Component {
   constructor(props) {
     super(props);
     console.log(history);
+
   }
   state = {};
   goBack = () => {

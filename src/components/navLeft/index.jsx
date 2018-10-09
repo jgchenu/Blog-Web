@@ -1,9 +1,18 @@
 import React from "react";
 import { Menu, Icon } from "antd";
 import "./index.less";
+import api from "@/lib/api.js";
 import history from "../../router/history";
 import routes from "../../router/routes";
+const { person } = api;
 class NavLeft extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      avatar: "",
+      introduction: ""
+    };
+  }
   handleClickMenu = ({ key }) => {
     if (key === "/home") {
       sessionStorage.setItem("page", 1);
@@ -19,11 +28,27 @@ class NavLeft extends React.Component {
       </Menu.Item>
     ));
   };
+  loadData = () => {
+    this.$axios({
+      url: person,
+      method: "get"
+    }).then(res => {
+      if (res.data.code === 200) {
+        this.setState({
+          introduction: res.data.data.introduction,
+          avatar: res.data.data.avatar
+        });
+      }
+    });
+  };
+  componentWillMount() {
+    this.loadData();
+  }
   render() {
     return (
       <div>
         <div className="avatarCard">
-          <img src="http://test.jgchen.xin/static/images/1.jpg" alt="" />
+          <img src={this.state.avatar} alt="" />
         </div>
         <Menu
           theme="light"

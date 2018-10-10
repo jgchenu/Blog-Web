@@ -45,7 +45,49 @@ class MessageBoard extends React.Component {
     };
     editor.create();
   };
-
+  handleRenderItem = item => {
+    return (
+      <div>
+        <List.Item className="comment">
+          <List.Item.Meta
+            avatar={<Avatar src={item.sayUser.avatar} />}
+            title={<a>{item.sayUser.userName}</a>}
+            description={
+              <div>
+                {item.content}
+                <br />
+                <div
+                  className="applyButton"
+                  onClick={() => this.handleApply(item.sayUser)}
+                >
+                  回复
+                </div>
+              </div>
+            }
+          />
+        </List.Item>
+        {item.apply.map((subItem, index) => (
+          <List.Item className="apply" key={index}>
+            <List.Item.Meta
+              avatar={<Avatar src={subItem.applySayUser.avatar} />}
+              title={<a>{subItem.applySayUser.userName}</a>}
+              description={
+                <div>
+                  <strong>
+                    @{subItem.applyToUser.userName}
+                    &nbsp;&nbsp;&nbsp;
+                  </strong>
+                  {subItem.content}
+                  <br />
+                  <div className="applyButton">回复</div>
+                </div>
+              }
+            />
+          </List.Item>
+        ))}
+      </div>
+    );
+  };
   componentDidMount() {
     this.initEdit();
   }
@@ -58,53 +100,7 @@ class MessageBoard extends React.Component {
             header={<div>评论</div>}
             itemLayout="horizontal"
             dataSource={this.state.data}
-            renderItem={item => (
-              <div>
-                <List.Item className="comment">
-                  <List.Item.Meta
-                    avatar={<Avatar src={item.sayUser[0].avatar} />}
-                    title={
-                      <a>{item.sayUser[0].userName}</a>
-                    }
-                    description={
-                      <div>
-                        {item.content}
-                        <br />
-                        <div
-                          className="applyButton"
-                          onClick={() => this.handleApply(item.sayUser.id)}
-                        >
-                          回复
-                        </div>
-                      </div>
-                    }
-                  />
-                </List.Item>
-                {item.apply.map((subItem, index) => (
-                  <List.Item className="apply" key={index}>
-                    <List.Item.Meta
-                      avatar={<Avatar src={subItem.applySayUser[0].avatar} />}
-                      title={
-                        <a>
-                          {subItem.applySayUser[0].userName}
-                        </a>
-                      }
-                      description={
-                        <div>
-                          <strong>
-                            @{subItem.applyToUser[0].userName}
-                            &nbsp;&nbsp;&nbsp;
-                          </strong>
-                          {subItem.content}
-                          <br />
-                          <div className="applyButton">回复</div>
-                        </div>
-                      }
-                    />
-                  </List.Item>
-                ))}
-              </div>
-            )}
+            renderItem={this.handleRenderItem}
           />
         </div>
         <div className="editor">

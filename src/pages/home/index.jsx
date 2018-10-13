@@ -2,6 +2,8 @@ import React from "react";
 import "./index.less";
 import MyCard from "./container/myCard";
 import api from "@/lib/api";
+import getPage from "@/lib/getPage";
+import history from "@/router/history"
 import { Pagination } from "antd";
 const { article } = api;
 class Article extends React.Component {
@@ -10,9 +12,8 @@ class Article extends React.Component {
     allCount: 0
   };
   componentWillMount() {
-    this.page = sessionStorage.getItem("page") || 1;
-    sessionStorage.setItem("page", this.page);
-    this.loadData(this.page);
+    this.page = getPage();
+    this.loadData(this.page, 10);
   }
   loadData = (page = 1, pageSize = 10) => {
     this.$axios({
@@ -30,8 +31,9 @@ class Article extends React.Component {
     });
   };
   onChange = (page, pageSize) => {
-    this.page = page;
-    sessionStorage.setItem("page", this.page);
+    document.scrollingElement.scrollTop = 0;
+    history.push(`/home/?page=${page}`);
+    this.page = getPage();
     this.loadData(page, pageSize);
   };
   render() {

@@ -1,28 +1,31 @@
 @import "./../../styles/vars.less";
 .avatarCard {
-  text-align: center;
-  height: 128px;
-  border-bottom: 1px solid @borderColor;
-  line-height: 128px;
-  img {
-    height: 80px;
-    width: 80px;
-    vertical-align: middle;
-    border-radius: 50%;
-    transition: all 0.5s;
-    border: 1px solid @borderColor;
-  }
-  img:hover {
-    box-shadow: 0 0 10px #bbbbbb;
-    animation: circle 1.5s infinite linear;
-    transform: rotate(180deg);
-  }
-  @keyframes circle {
-    0% {
-      transform: rotate(0deg);
+    text-align: center;
+    height: 128px;
+    border-bottom: 1px solid @borderColor;
+    line-height: 128px;
+    .avatarImg {
+        height: 80px;
+        width: 80px;
+        vertical-align: middle;
+        border-radius: 50%;
+        transition: all 0.5s;
+        border: 1px solid @borderColor;
     }
-    100% {
-      transform: rotate(360deg);
+    @keyframes circle {
+        0% {
+            transform: rotate(0deg);
+        }
+        100% {
+            transform: rotate(360deg);
+        }
     }
-  }
+}
+
+.left:hover {
+    .avatarImg {
+        box-shadow: 0 0 10px #bbbbbb;
+        animation: circle 1.5s infinite linear;
+        transform: rotate(180deg);
+    }
 }

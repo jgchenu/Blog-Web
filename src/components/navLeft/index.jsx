@@ -45,15 +45,18 @@ class NavLeft extends React.Component {
     this.loadData();
   }
   render() {
+    let item = routes.slice(0, 5).find(item => {
+      return history.location.pathname.indexOf(item.path) !== -1;
+    });
     return (
       <div>
         <div className="avatarCard">
-          <img src={this.state.avatar} alt="" />
+          <img src={this.state.avatar} alt="" className='avatarImg'/>
         </div>
         <Menu
           theme="light"
           mode="inline"
-          defaultSelectedKeys={[history.location.pathname]}
+          defaultSelectedKeys={[(item && item.path) || ""]}
           onClick={this.handleClickMenu}
         >
           {this.returnItems()}

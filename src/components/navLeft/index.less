@@ -1,24 +1,50 @@
 @import "./../../styles/vars.less";
-.avatarCard {
-    text-align: center;
-    height: 128px;
-    border-bottom: 1px solid @borderColor;
-    line-height: 128px;
-    .avatarImg {
-        height: 80px;
-        width: 80px;
-        vertical-align: middle;
-        border-radius: 50%;
-        transition: all 0.5s;
-        border: 1px solid @borderColor;
+.navLeft {
+    .avatarCard {
+        text-align: center;
+        height: 128px;
+        border-bottom: 1px solid @borderColor;
+        line-height: 128px;
+        .avatarImg {
+            height: 80px;
+            width: 80px;
+            vertical-align: middle;
+            border-radius: 50%;
+            transition: all 0.5s;
+            border: 1px solid @borderColor;
+        }
+        @keyframes circle {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
     }
-    @keyframes circle {
-        0% {
-            transform: rotate(0deg);
+    .regLogButton {
+        height: 60px;
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+    }
+    .loginMessage {
+        text-align: center;
+        img {
+            width: 40px;
+            height: 40px;
         }
-        100% {
-            transform: rotate(360deg);
-        }
+    }
+}
+
+.loginModel {
+    text-align: center;
+    max-width: 300px;
+    .login-form {
+        max-width: 300px;
+    }
+    .login-form-button {
+        width: 100%;
     }
 }
 

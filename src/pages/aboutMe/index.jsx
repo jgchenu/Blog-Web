@@ -8,7 +8,7 @@ class User extends React.Component {
   }
   loadData = () => {
     this.$axios({
-      url: person,
+      url: `${person}`,
       method: "get"
     }).then(res => {
       if (res.data.code === 200) {

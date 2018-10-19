@@ -26,17 +26,6 @@ class Detail extends React.Component {
     this.initEdit();
   }
   loadData = () => {
-    // //加载评论数据
-    // this.$axios({
-    //   url: `${comment}/board`,
-    //   method: "get"
-    // }).then(res => {
-    //   console.log(res);
-    //   if (res.data.code === 200) {
-    //     this.setState({});
-    //   }
-    // });
-    //加载文章的数据
     this.$axios({
       method: "get",
       url: `${article}/${this.state.id}`
@@ -142,7 +131,6 @@ class Detail extends React.Component {
       method: "post",
       data: requestData
     }).then(res => {
-      console.log(res);
       if (res.data.code === 200) {
         message.success("发布成功", 1, () => {
           this.handleCancelApply();

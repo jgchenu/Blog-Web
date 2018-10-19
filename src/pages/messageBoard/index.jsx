@@ -141,13 +141,18 @@ class MessageBoard extends React.Component {
       method: "post",
       data: requestData
     }).then(res => {
-      console.log(res);
       if (res.data.code === 200) {
-        message.success("发布成功", 2, () => {
-          this.handleCancelApply();
-          this.loadData();
-          this.editor.txt.clear();
-        });
+        this.handleCancelApply();
+        this.loadData();
+        this.editor.txt.clear();
+        this.setState(
+          {
+            editorContent: ""
+          },
+          () => {
+            message.success("发布成功", 1);
+          }
+        );
       }
     });
   };

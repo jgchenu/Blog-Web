@@ -46,9 +46,6 @@ class NavLeft extends React.Component {
   };
   loadAdminData = () => {
     this.props.getAdminInfo();
-    setTimeout(() => {
-      console.log(this.props)
-    }, 1000);
   };
   showModal = status => {
     this.setState({

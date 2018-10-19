@@ -37,7 +37,6 @@ class MessageBoard extends React.Component {
         pageSize
       }
     }).then(res => {
-      console.log(res);
       this.setState({
         indexList: res.data.data,
         allCount: res.data.count
@@ -128,7 +127,6 @@ class MessageBoard extends React.Component {
   };
   handleSubmit = () => {
     let requestData = {
-      sayId: 1,
       commentType: 2,
       content: this.state.editorContent
     };

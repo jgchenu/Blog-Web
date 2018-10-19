@@ -3,6 +3,9 @@ import { Menu, Icon } from "antd";
 import "./index.less";
 import history from "../../router/history";
 import routes from "../../router/routes";
+import { connect } from "react-redux";
+
+@connect(state => state)
 class NavLeft extends React.Component {
   state = {
     show: true
@@ -47,7 +50,7 @@ class NavLeft extends React.Component {
 
         <div style={{ display: this.state.show ? "block" : "none" }}>
           <div className="avatarCard">
-            <img src="http://test.jgchen.xin/static/images/1.jpg" alt="" />
+            <img src={this.props.admin.avatar} alt="" />
           </div>
           <Menu
             theme="light"

@@ -4,6 +4,7 @@ import NProgress from 'nprogress'
 import {
     message
 } from 'antd'
+
 const instance = axios.create({
     baseURL: process.env.NODE_ENV === 'development' ? 'http://localhost:8000/api' : '/',
     timeout: 10000,

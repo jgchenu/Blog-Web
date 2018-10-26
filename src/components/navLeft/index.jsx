@@ -244,11 +244,7 @@ class NavLeft extends React.Component {
               listType="picture-card"
               className="avatar-uploader"
               showUploadList={false}
-              action={
-                process.env.NODE_ENV === "development"
-                  ? "http://localhost:8000/api/user/editAvatar"
-                  : "/api/user/editAvatar"
-              }
+              action="/api/user/editAvatar"
               headers={{
                 Authorization: "Bearer " + localStorage.getItem("token")
               }}

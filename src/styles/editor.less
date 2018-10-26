@@ -18,6 +18,7 @@ table th {
 /* blockquote 样式 */
 
 blockquote {
+    overflow: scroll;
     display: block;
     border-left: 8px solid #d0e5f2;
     padding: 5px 10px;
@@ -41,6 +42,8 @@ code {
 
 pre {
     &:extend(code);
+    display: block !important;
+    overflow: scroll !important;
 }
 
 pre code {

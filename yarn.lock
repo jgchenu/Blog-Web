@@ -1468,12 +1468,6 @@ caniuse-lite@^1.0.30000748, caniuse-lite@^1.0.30000792:
   version "1.0.30000885"
   resolved "http://r.cnpmjs.org/caniuse-lite/download/caniuse-lite-1.0.30000885.tgz#e889e9f8e7e50e769f2a49634c932b8aee622984"
 
-canvas-nest.js@^2.0.3:
-  version "2.0.3"
-  resolved "http://r.cnpmjs.org/canvas-nest.js/download/canvas-nest.js-2.0.3.tgz#1ee967d977a7a301b8e3eefd16702b812b8ed7f3"
-  dependencies:
-    size-sensor "^0.2.0"
-
 capture-stack-trace@^1.0.0:
   version "1.0.1"
   resolved "http://r.cnpmjs.org/capture-stack-trace/download/capture-stack-trace-1.0.1.tgz#a6c0bbe1f38f3aa0b92238ecb6ff42c344d4135d"
@@ -6935,10 +6929,6 @@ shellwords@^0.1.1:
 signal-exit@^3.0.0, signal-exit@^3.0.2:
   version "3.0.2"
   resolved "http://r.cnpmjs.org/signal-exit/download/signal-exit-3.0.2.tgz#b5fdc08f1287ea1178628e415e25132b73646c6d"
-
-size-sensor@^0.2.0:
-  version "0.2.1"
-  resolved "http://r.cnpmjs.org/size-sensor/download/size-sensor-0.2.1.tgz#e0f7351816a12cd8ba33475aa964112d1cf75439"
 
 slash@^1.0.0:
   version "1.0.0"

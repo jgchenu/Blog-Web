@@ -37,7 +37,7 @@ instance.interceptors.response.use((res) => {
         message.error('请重新登录');
         localStorage.clear();
     } else if (error.response.status === 500) {
-        message.error(JSON.stringify(error.response.message))
+        message.error('500 报错，请检查网络')
     }
     return Promise.reject(error);
 });

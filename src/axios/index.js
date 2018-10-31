@@ -34,8 +34,8 @@ instance.interceptors.response.use((res) => {
     //404等问题可以在这里处理
     NProgress.done()
     if (error.response.status === 401) {
-        message.error('请重新登录');
         localStorage.clear();
+        message.error('登录信息过期，请重新登录');
     } else if (error.response.status === 500) {
         message.error('500 报错，请检查网络')
     }

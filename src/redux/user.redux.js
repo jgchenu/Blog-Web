@@ -37,7 +37,7 @@ export function user(state = initState, action) {
 export function login(data) {
   message.success(data.message, 1);
   localStorage.setItem("token", data.token);
-  localStorage.setItem("token_exp", new Date().getTime());
+  localStorage.setItem("token_exp", Date.now()+24*60*60*1000);
   return infoData(data)
 }
 //登出清除

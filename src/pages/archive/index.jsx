@@ -3,12 +3,12 @@ import { Timeline, Icon, Pagination } from "antd";
 import "./index.less";
 import history from "@/router/history";
 import api from "@/lib/api";
-import getPage from "@/lib/getPage";
+import getParam from "@/lib/getParam";
 const { archive } = api;
 class Archive extends React.Component {
   state = { indexList: [], allCount: 0 };
   componentWillMount() {
-    this.page = getPage();
+    this.page = getParam('page');
     this.loadData();
   }
   loadData = (page = 1, pageSize = 10) => {
@@ -31,7 +31,7 @@ class Archive extends React.Component {
   onChange = (page, pageSize) => {
     document.scrollingElement.scrollTop = 0;
     history.push(`/archive/?page=${page}`);
-    this.page = getPage();
+    this.page = getParam('page');
     this.loadData(page, pageSize);
   };
   renderTimeItem = () => {

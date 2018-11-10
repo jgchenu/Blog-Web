@@ -8,7 +8,7 @@ import { logout } from "@/redux/user.redux";
 )
 class AuthRoute extends React.Component {
   componentWillMount() {
-    if (!localStorage.token || localStorage.token_exp < +Date.now()) {
+    if (localStorage.token_exp < +Date.now()) {
       localStorage.clear();
       this.props.logout();
       message.error("登录信息过期，请重新登录", 1);

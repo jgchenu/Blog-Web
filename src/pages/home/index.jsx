@@ -3,8 +3,9 @@ import "./index.less";
 import MyCard from "./container/myCard";
 import api from "@/lib/api";
 import getPage from "@/lib/getPage";
-import history from "@/router/history"
-import { Pagination } from "antd";
+import history from "@/router/history";
+import { Pagination, Input } from "antd";
+const Search = Input.Search;
 const { article } = api;
 class Article extends React.Component {
   state = {
@@ -13,16 +14,14 @@ class Article extends React.Component {
   };
   componentWillMount() {
     this.page = getPage();
-    this.loadData(this.page, 10);
+    this.loadData();
   }
-  loadData = (page = 1, pageSize = 10) => {
+  loadData = () => {
+    let params = { page: this.page, keyword: this.keyword };
     this.$axios({
       url: article,
       method: "get",
-      params: {
-        page,
-        pageSize
-      }
+      params
     }).then(res => {
       this.setState({
         indexList: res.data.data,
@@ -30,15 +29,30 @@ class Article extends React.Component {
       });
     });
   };
-  onChange = (page, pageSize) => {
+  onChange = page => {
     document.scrollingElement.scrollTop = 0;
     history.push(`/home/?page=${page}`);
     this.page = getPage();
-    this.loadData(page, pageSize);
+    this.loadData();
+  };
+  handleSearch = value => {
+    this.keyword = value;
+    document.scrollingElement.scrollTop = 0;
+    history.push(`/home/?page=1`);
+    this.page = getPage();
+    this.loadData();
   };
   render() {
     return (
       <div className="home">
+        <div className="homeSearch">
+          <Search
+            placeholder="搜索文章"
+            size="large"
+            onSearch={this.handleSearch}
+            enterButton
+          />
+        </div>
         <div className="lists">
           {this.state.indexList.map((item, index) => (
             <MyCard list={item} key={index} />
@@ -46,7 +60,7 @@ class Article extends React.Component {
         </div>
         <div className="footer">
           <Pagination
-            defaultCurrent={parseInt(this.page,10)}
+            defaultCurrent={parseInt(this.page, 10)}
             total={this.state.allCount}
             onChange={this.onChange}
           />

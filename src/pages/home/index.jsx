@@ -1,43 +1,39 @@
-import React from "react";
-import "./index.less";
-import MyCard from "./container/myCard";
-import api from "@/lib/api";
-import getParam from "@/lib/getParam";
-import history from "@/router/history";
-import { Pagination, Input } from "antd";
-const Search = Input.Search;
-const { article } = api;
+import React from 'react'
+import './index.less'
+import MyCard from './container/myCard'
+import api from '@/lib/api'
+import getParam from '@/lib/getParam'
+import history from '@/router/history'
+import { Pagination, Input } from 'antd'
+const Search = Input.Search
 class Article extends React.Component {
   state = {
     indexList: [],
     allCount: 0
-  };
-  componentWillMount() {
-    this.loadData();
   }
-  loadData = () => {
-    let params = { page:getParam('page'), keyword: getParam('keyword') };
-    this.$axios({
-      url: article,
-      method: "get",
-      params
-    }).then(res => {
+  componentWillMount() {
+    this.loadData()
+  }
+  loadData = async () => {
+    let params = { page: getParam('page'), keyword: getParam('keyword') }
+    const res = await api.getArticles(params)
+    if (res.data.code === 0) {
       this.setState({
         indexList: res.data.data,
         allCount: res.data.count
-      });
-    });
-  };
+      })
+    }
+  }
   onChange = page => {
-    document.scrollingElement.scrollTop = 0;
-    history.push(`/home/?page=${page}&keyword=${getParam('keyword')}`);
-    this.loadData();
-  };
+    document.scrollingElement.scrollTop = 0
+    history.push(`/home/?page=${page}&keyword=${getParam('keyword')}`)
+    this.loadData()
+  }
   handleSearch = keyword => {
-    document.scrollingElement.scrollTop = 0;
-    history.push(`/home/?page=1&keyword=${keyword}`);
-    this.loadData();
-  };
+    document.scrollingElement.scrollTop = 0
+    history.push(`/home/?page=1&keyword=${keyword}`)
+    this.loadData()
+  }
   render() {
     return (
       <div className="home">
@@ -62,8 +58,8 @@ class Article extends React.Component {
           />
         </div>
       </div>
-    );
+    )
   }
 }
 
-export default Article;
+export default Article

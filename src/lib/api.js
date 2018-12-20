@@ -20,6 +20,20 @@ const subComment = ({
     method: 'post',
     data
 })
+const getBoardComments = (params) => axios({
+    url: `board/comments`,
+    method: 'get',
+    params
+})
+const getArticlesByTag = (tag, params) => axios({
+    url: `/tags/${tag}/articles`,
+    method: 'get',
+    params
+})
+const getTags = (params) => axios({
+    url: '/tags',
+    params
+})
 const api = {
     article: '/article',
     tag: '/tag',
@@ -32,6 +46,9 @@ export {
     getArticles,
     getArchives,
     getArticleById,
-    subComment
+    subComment,
+    getBoardComments,
+    getArticlesByTag,
+    getTags
 }
 export default api;

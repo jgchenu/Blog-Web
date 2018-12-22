@@ -5,15 +5,12 @@ import history from '@/router/history'
 import api from '@/lib/api'
 import getParam from '@/lib/getParam'
 class Archive extends React.Component {
-  state = { indexList: [], allCount: 0, page: 1, pageSize: 10 }
-  componentWillMount() {
-    this.setState({
-      page: getParam('page')
-    })
+  state = { indexList: [], allCount: 0 }
+  componentDidMount() {
     this.loadData()
   }
   loadData = async () => {
-    const params = { page: this.state.page, pageSize: this.state.pageSize }
+    const params = { page: getParam('page') }
     const res = await api.getArchives(params)
     if (res.data.code === 0) {
       this.setState({
@@ -22,17 +19,16 @@ class Archive extends React.Component {
       })
     }
   }
-  onChange = () => {
+  onChange = page => {
     document.scrollingElement.scrollTop = 0
-    history.push(`/archive/?page=${this.state.page}`)
-    this.page = getParam('page')
+    history.push(`/archive/?page=${page}`)
     this.loadData()
   }
   renderTimeItem = () => {
     return this.state.indexList.map((item, index) => (
       <Timeline.Item
         key={index}
-        onClick={this.goDetail.bind(this, item.id)}
+        onClick={()=>this.goDetail(item.id)}
         dot={<Icon type="clock-circle-o" style={{ fontSize: '16px' }} />}
         color="blue"
       >
@@ -49,11 +45,11 @@ class Archive extends React.Component {
   }
   render() {
     return (
-      <div className="archive">
+      <div className="page-archive">
         <Timeline mode="alternate">{this.renderTimeItem()}</Timeline>
-        <div className="footer">
+        <div className="page-archive-footer">
           <Pagination
-            defaultCurrent={parseInt(this.state.page, 10)}
+            defaultCurrent={parseInt(getParam('page'), 10)}
             total={this.state.allCount}
             onChange={this.onChange}
           />

@@ -11,16 +11,14 @@ class Detail extends React.Component {
       indexList: { content: { value: '' } },
       id: this.props.match.params.id,
       editorContent: '',
-      allCount: 10,
+      allCount: 0,
       data: [],
       applyPerson: {},
       commentId: ''
     }
   }
-  componentWillMount() {
-    this.loadData()
-  }
   componentDidMount() {
+    this.loadData()
     this.initEdit()
   }
   loadData = async () => {

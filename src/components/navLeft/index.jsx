@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react'
 import {
   Menu,
   Icon,
@@ -9,17 +9,15 @@ import {
   message,
   Popover,
   Upload
-} from "antd";
-import "./index.less";
-import api from "@/lib/api.js";
-import { connect } from "react-redux";
-import { login, getInfo, logout, updateAvatar } from "@/redux/user.redux";
-import { getAdminInfo } from "@/redux/admin.redux";
-import history from "../../router/history";
-import routes from "../../router/routes";
-
-const { user } = api;
-const FormItem = Form.Item;
+} from 'antd'
+import './index.less'
+import api from '@/lib/api.js'
+import { connect } from 'react-redux'
+import { login, getInfo, logout, updateAvatar } from '@/redux/user.redux'
+import { getAdminInfo } from '@/redux/admin.redux'
+import history from '../../router/history'
+import routes from '../../router/routes'
+const FormItem = Form.Item
 
 @connect(
   state => state,
@@ -27,122 +25,139 @@ const FormItem = Form.Item;
 )
 class NavLeft extends React.Component {
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
-      introduction: "",
+      introduction: '',
       visible: false,
-      status: "",
+      status: '',
       loading: false
-    };
+    }
   }
-  componentWillMount() {
-    this.loadAdminData();
-    this.initUser();
+  componentDidMount() {
+    this.loadAdminData()
+    this.initUser()
   }
   initUser = () => {
     if (localStorage.token) {
-      this.props.getInfo();
+      this.props.getInfo()
     }
-  };
+  }
   loadAdminData = () => {
-    this.props.getAdminInfo();
-  };
+    this.props.getAdminInfo()
+  }
   showModal = status => {
     this.setState({
       visible: true,
       status
-    });
-  };
+    })
+  }
   handleCancel = () => {
-    this.setState({ visible: false });
-  };
+    this.setState({ visible: false })
+  }
   handleSubmit = e => {
-    e.preventDefault();
+    e.preventDefault()
     this.props.form.validateFields((err, values) => {
       if (!err) {
-        this.handleLogReg(values);
+        this.handleLogReg(values)
       }
-    });
-  };
-  handleLogReg = values => {
-    this.$axios({
-      url: `${user}/${this.state.status}`,
-      method: "post",
-      data: values
-    }).then(res => {
-      if (res.data.code === 200) {
-        if (this.state.status === "login") {
-          this.props.login(res.data);
-        } else {
-          message.success(res.data.message, 1);
-        }
-        this.handleCancel();
+    })
+  }
+  handleLogReg = async values => {
+    let res = {}
+    //根据状态判断请求还是注册
+    if (this.state.status === 'login') {
+      res = await api.loginUser(values)
+    } else if (this.state.status === 'register') {
+      res = await api.registerUser(values)
+    }
+    if (res.data.code === 0) {
+      if (this.state.status === 'login') {
+        this.props.login(res.data)
       } else {
-        message.error(res.data.message);
+        message.success(res.data.message, 1)
       }
-    });
-  };
+      this.handleCancel()
+    } else {
+      message.error(res.data.message)
+    }
+  }
   handleLogout = () => {
-    this.props.logout();
-  };
+    this.props.logout()
+  }
   handleClickMenu = ({ key }) => {
-    history.push(key);
-  };
+    this.props.onHideNavLeft();
+    history.push(key)
+  }
   returnItems = () => {
-    let routeMenus = routes.slice(0, 5);
+    let routeMenus = routes.slice(0, 5)
     return routeMenus.map(item => (
       <Menu.Item key={item.path}>
         <Icon type={item.iconType} />
         <span>{item.title}</span>
       </Menu.Item>
-    ));
-  };
+    ))
+  }
   beforeUpload = file => {
-    const isJPG = file.type === "image/jpeg" || file.type === "image/png";
+    const isJPG = file.type === 'image/jpeg' || file.type === 'image/png'
     if (!isJPG) {
-      message.error("你只能选择图片");
+      message.error('你只能选择图片')
     }
-    const isLt2M = file.size / 1024 / 1024 < 2;
+    const isLt2M = file.size / 1024 / 1024 < 2
     if (!isLt2M) {
-      message.error("图片大小不能超过2M");
+      message.error('图片大小不能超过2M')
     }
-    return isJPG && isLt2M;
-  };
-
+    return isJPG && isLt2M
+  }
   handleChange = info => {
-    if (info.file.status === "uploading") {
-      this.setState({ loading: true });
-      return;
+    if (info.file.status === 'uploading') {
+      this.setState({ loading: true })
+      return
     }
-    if (info.file.status === "done") {
+    if (info.file.status === 'done') {
       this.setState({
         loading: false
-      });
+      })
       if (info.file.response.code === 200) {
-        this.props.updateAvatar(info.file.response);
+        this.props.updateAvatar(info.file.response)
       }
     }
-  };
+  }
   render() {
-    const { getFieldDecorator } = this.props.form;
+    const { getFieldDecorator } = this.props.form
     const uploadButton = (
       <div>
-        <Icon type={this.state.loading ? "loading" : "plus"} />
+        <Icon type={this.state.loading ? 'loading' : 'plus'} />
         <div className="ant-upload-text">Upload</div>
       </div>
-    );
+    )
     let item = routes.slice(0, 5).find(item => {
-      return history.location.pathname.indexOf(item.path) !== -1;
-    });
+      return history.location.pathname.indexOf(item.path) !== -1
+    })
     return (
-      <div className="navLeft">
-        <div className="avatarCard">
-          <img src={this.props.admin.avatar} alt="" className="avatarImg" />
+      <div className="components-nav-left">
+        <div className="components-nav-avatar">
+          <img
+            src={this.props.admin.avatar}
+            alt=""
+            className="components-nav-avatar-img"
+          />
+          <Icon
+            onClick={this.props.onHideNavLeft}
+            type="close-circle"
+            theme="twoTone"
+            className="app-container-left-show-button"
+            style={{
+              fontSize: 30,
+              position: 'absolute',
+              right: '.8rem',
+              top: '1.5rem'
+            }}
+          />
         </div>
         <Menu
           theme="light"
           mode="inline"
-          defaultSelectedKeys={[(item && item.path) || ""]}
+          defaultSelectedKeys={[(item && item.path) || '']}
           onClick={this.handleClickMenu}
         >
           {this.returnItems()}
@@ -151,7 +166,7 @@ class NavLeft extends React.Component {
           <Popover
             content={
               <div>
-                <div onClick={() => this.showModal("editAvatar")}>
+                <div onClick={() => this.showModal('editAvatar')}>
                   <a>更换头像</a>
                 </div>
                 <div onClick={this.handleLogout}>
@@ -163,25 +178,26 @@ class NavLeft extends React.Component {
             trigger="hover"
             placement="right"
           >
-            <div className="loginMessage">
+            <div className="components-nav-logined-avatar">
+              <span>读者信息：</span>
               <img src={this.props.user.avatar} alt="" width={50} />
             </div>
           </Popover>
         ) : (
-          <div className="regLogButton">
+          <div className="components-nav-left-footer">
             <Button
               type="primary"
               ghost
-              className="login"
-              onClick={() => this.showModal("login")}
+              className="components-nav-left-footer-login"
+              onClick={() => this.showModal('login')}
             >
               登录
             </Button>
             <Button
               type="danger"
               ghost
-              className="register"
-              onClick={() => this.showModal("register")}
+              className="components-nav-left-footer-register"
+              onClick={() => this.showModal('register')}
             >
               注册
             </Button>
@@ -192,36 +208,39 @@ class NavLeft extends React.Component {
           visible={this.state.visible}
           onCancel={this.handleCancel}
           title={
-            this.state.status === "login"
-              ? "登录"
-              : this.state.status === "register"
-                ? "注册"
-                : "更换头像"
+            this.state.status === 'login'
+              ? '登录'
+              : this.state.status === 'register'
+              ? '注册'
+              : '更换头像'
           }
           footer={null}
-          className="loginModel"
+          className="components-nav-left-modal-login"
         >
           {/(login|register)/.test(this.state.status) ? (
-            <Form onSubmit={this.handleSubmit} className="login-form">
+            <Form
+              onSubmit={this.handleSubmit}
+              className="components-nav-left-modal-login-form"
+            >
               <FormItem>
-                {getFieldDecorator("userName", {
-                  rules: [{ required: true, message: "请输入你的用户名" }]
+                {getFieldDecorator('userName', {
+                  rules: [{ required: true, message: '请输入你的用户名' }]
                 })(
                   <Input
                     prefix={
-                      <Icon type="user" style={{ color: "rgba(0,0,0,.25)" }} />
+                      <Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />
                     }
                     placeholder="Username"
                   />
                 )}
               </FormItem>
               <FormItem>
-                {getFieldDecorator("password", {
-                  rules: [{ required: true, message: "请输入密码" }]
+                {getFieldDecorator('password', {
+                  rules: [{ required: true, message: '请输入密码' }]
                 })(
                   <Input
                     prefix={
-                      <Icon type="lock" style={{ color: "rgba(0,0,0,.25)" }} />
+                      <Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />
                     }
                     type="password"
                     placeholder="Password"
@@ -232,9 +251,9 @@ class NavLeft extends React.Component {
                 <Button
                   type="primary"
                   htmlType="submit"
-                  className="login-form-button"
+                  className="components-nav-left-modal-login-form-button"
                 >
-                  {this.state.status === "login" ? "登录" : "注册"}
+                  {this.state.status === 'login' ? '登录' : '注册'}
                 </Button>
               </FormItem>
             </Form>
@@ -242,11 +261,11 @@ class NavLeft extends React.Component {
             <Upload
               name="avatar"
               listType="picture-card"
-              className="avatar-uploader"
+              className="components-nav-left-modal-login-uploader"
               showUploadList={false}
               action="/api/user/editAvatar"
               headers={{
-                Authorization: "Bearer " + localStorage.getItem("token")
+                Authorization: 'Bearer ' + localStorage.getItem('token')
               }}
               beforeUpload={this.beforeUpload}
               onChange={this.handleChange}
@@ -255,7 +274,7 @@ class NavLeft extends React.Component {
                 <img
                   src={this.props.user.avatar}
                   alt="avatar"
-                  className="ant-upload"
+                  className="components-nav-left-modal-login-uploader-img"
                 />
               ) : (
                 uploadButton
@@ -264,8 +283,8 @@ class NavLeft extends React.Component {
           )}
         </Modal>
       </div>
-    );
+    )
   }
 }
-const WrappedNavLeft = Form.create()(NavLeft);
-export default WrappedNavLeft;
+const WrappedNavLeft = Form.create()(NavLeft)
+export default WrappedNavLeft

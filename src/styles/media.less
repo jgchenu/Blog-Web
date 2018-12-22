@@ -1,10 +1,38 @@
-@media screen and (max-width: 700px) {
-    .container {
-        .left {
-            display: none;
+//关于手机的样式媒体查询覆盖样式
+@media screen and (max-width: 400px) {
+    .app-container {
+        position: relative; //左边的导航菜单隐藏
+        .app-container-left.ant-layout-sider.ant-layout-sider-dark {
+            background: #ffffff;
+            position: absolute;
+            z-index: 1000;
+            max-width: 90% !important;
+            min-width: 90% !important;            
         }
-        .right {
-            .mHeader {
+        .app-container-left-show-button{
+            display: block;
+          }
+        .app-container-left-show {
+            animation: show linear .3s;
+        }
+        .app-container-left-hide{
+            // animation: hide linear .4s !important;
+            transition: all linear .3s;
+            transform: translate(100%, 0);
+            opacity: 0;
+        }
+        @keyframes show {
+            0% {
+                opacity: 0;
+                transform: translate(100%, 0);
+            }
+            100% {
+                opacity: 1;
+                transform: translate(0, 0);
+            }
+        }
+        .app-container-right {
+            .components-moblie-header {
                 display: block;
             }
         }

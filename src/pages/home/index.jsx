@@ -11,7 +11,7 @@ class Article extends React.Component {
     indexList: [],
     allCount: 0
   }
-  componentWillMount() {
+  componentDidMount() {
     this.loadData()
   }
   loadData = async () => {

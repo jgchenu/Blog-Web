@@ -1,43 +1,41 @@
-@import "../styles/vars.less";
-.container {
-    min-height: 100vh; // background: #f5f5f5;
+@import '../styles/vars.less';
+.app-container {
+  min-height: 100vh; // background: #f5f5f5;
+  background-color: transparent;
+  .app-container-left-show-button{
+    display: none;
+  }
+  .app-container-left {
     background-color: transparent;
-    .left {
-        background-color: transparent;
-        padding: 0;
-        border-radius: 20px;
-        border: 1px solid @borderColor;
-        box-shadow: 0 0 2px #eeeeee;
-        margin: 20px 0px 20px 20px;
-        height: 420px;
+    padding: 0;
+    border-radius: 20px;
+    border: 1px solid @borderColor;
+    box-shadow: 0 0 2px #eeeeee;
+    margin: 20px 0px 20px 20px;
+    height: 420px;
+  }
+  .app-container-right {
+    flex: 20;
+    margin: 20px;
+    border-radius: 20px 20px 0 0;
+    box-shadow: 0 0 4px #bbbbbb;
+    background-color: transparent;
+    .app-container-right-content {
+      padding: 20px;
+      background-color: transparent;
     }
-    .right {
-        flex: 20;
-        margin: 20px;
-        border-radius: 20px 20px 0 0;
-        box-shadow: 0 0 4px #bbbbbb;
-        background-color: transparent;
-        .content {
-            padding: 20px;
-            background-color: transparent;
-        }
-        .mHeader {
-            display: none;
-            margin-bottom: .6rem;
-            background-color: transparent;
-            border-bottom: 2px solid @borderColor;
-        }
+
+  } //返回顶部的按钮
+  .app-container-right-content {
+    .ant-back-top-inner {
+      height: 40px;
+      width: 40px;
+      line-height: 40px;
+      border-radius: 50%;
+      background-color: @primary !important;
+      color: #fff;
+      text-align: center;
+      font-size: 20px;
     }
-    .content {
-        .ant-back-top-inner {
-            height: 40px;
-            width: 40px;
-            line-height: 40px;
-            border-radius: 50%;
-            background-color: @primary  !important;
-            color: #fff;
-            text-align: center;
-            font-size: 20px;
-        }
-    }
+  }
 }

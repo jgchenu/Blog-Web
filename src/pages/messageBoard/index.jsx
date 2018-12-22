@@ -12,34 +12,19 @@ class MessageBoard extends React.Component {
     super(props, context)
     this.state = {
       editorContent: '',
-      allCount: 10,
+      allCount: 0,
       indexList: [],
       applyPerson: {},
-      commentId: '',
-      page: 1,
-      pageSize: 10
+      commentId: ''
     }
   }
-  componentWillMount() {
-    this.setState(
-      {
-        page: getParam('page')
-      },
-      () => {
-        this.loadData()
-      }
-    )
-  }
   componentDidMount() {
+    this.loadData()
     this.initEdit()
   }
 
   loadData = async () => {
-    const params = {
-      page: this.state.page,
-      pageSize: this.state.pageSize
-    }
-    const res = await api.getBoardComments(params)
+    const res = await api.getBoardComments({ page: getParam('page') })
     if (res.data.code === 0) {
       this.setState({
         indexList: res.data.data,
@@ -58,30 +43,28 @@ class MessageBoard extends React.Component {
     }
     this.editor.create()
   }
-  onChange = () => {
+  onChange = page => {
     document.scrollingElement.scrollTop = 0
-    history.push(`/messageBoard/?page=${this.state.page}`)
-    this.setState(
-      {
-        page: getParam('page')
-      },
-      () => {
-        this.loadData()
-      }
-    )
+    history.push(`/admin/messageBoard/?page=${page}`)
+    this.loadData()
   }
   handleRenderItem = item => {
     return (
       <div>
-        <List.Item className="comment">
+        <List.Item className="page-board-content-comment">
           <List.Item.Meta
             avatar={<Avatar src={item.sayUser.avatar} />}
-            title={<a>{item.sayUser.userName}</a>}
+            title={
+              <a>
+                {item.sayUser.userName}
+                {item.sayUser.authority === 1 ? '【博主】' : '【用户】'}
+              </a>
+            }
             description={
               <div>
                 <div dangerouslySetInnerHTML={{ __html: item.content }} />
                 <div
-                  className="applyButton"
+                  className="page-board-content-apply-button"
                   onClick={() => this.handleApply(item.sayUser, item.id)}
                 >
                   回复
@@ -91,21 +74,31 @@ class MessageBoard extends React.Component {
           />
         </List.Item>
         {item.apply.map((subItem, index) => (
-          <List.Item className="apply" key={index}>
+          <List.Item className="page-board-content-apply" key={index}>
             <List.Item.Meta
               avatar={<Avatar src={subItem.applySayUser.avatar} />}
-              title={<a>{subItem.applySayUser.userName}</a>}
+              title={
+                <a>
+                  {subItem.applySayUser.userName}
+                  {subItem.applySayUser.authority === 1
+                    ? '【博主】'
+                    : '【用户】'}
+                </a>
+              }
               description={
                 <div>
                   <strong>
                     @ <Avatar src={subItem.applyToUser.avatar} />
                     &nbsp;
                     {subItem.applyToUser.userName}
+                    {subItem.applyToUser.authority === 1
+                      ? '【博主】'
+                      : '【用户】'}
                     &nbsp;&nbsp;&nbsp;
                   </strong>
                   <div dangerouslySetInnerHTML={{ __html: subItem.content }} />
                   <div
-                    className="applyButton"
+                    className="page-board-content-apply-button"
                     onClick={() =>
                       this.handleApply(subItem.applySayUser, item.id)
                     }
@@ -136,6 +129,7 @@ class MessageBoard extends React.Component {
   }
   handleSubmit = async () => {
     let requestData = {
+      sayId: 1,
       commentType: 2,
       content: this.state.editorContent
     }
@@ -145,27 +139,20 @@ class MessageBoard extends React.Component {
         commentId: this.state.commentId
       })
     }
-    const res = await api.subComment(requestData)
+    const res = await api.subComment({ data: requestData })
     if (res.data.code === 0) {
       this.handleCancelApply()
       this.loadData()
       this.editor.txt.clear()
-      this.setState(
-        {
-          editorContent: ''
-        },
-        () => {
-          message.success('发布成功', 1)
-        }
-      )
+      message.success('发布成功')
     }
   }
 
   render() {
     return (
-      <div className="messageBoard">
+      <div className="page-board">
         <h2>我想是时候开个留言板让大家吐槽了:)</h2>
-        <div className="boardContent">
+        <div className="page-board-content">
           <List
             header={<div>评论</div>}
             itemLayout="horizontal"
@@ -173,7 +160,7 @@ class MessageBoard extends React.Component {
             renderItem={this.handleRenderItem}
           />
         </div>
-        <div className="editor">
+        <div className="page-board-editor">
           <Card
             title={
               this.state.applyPerson.userName ? (
@@ -191,7 +178,7 @@ class MessageBoard extends React.Component {
             style={{ width: '100%' }}
           >
             <div ref="editorElem" style={{ textAlign: 'left' }} />
-            <div className="button">
+            <div className="page-board-editor-button">
               <Button type="primary" onClick={this.handleSubmit}>
                 发布
               </Button>
@@ -199,9 +186,9 @@ class MessageBoard extends React.Component {
           </Card>
         </div>
 
-        <div className="footer">
+        <div className="page-board-footer">
           <Pagination
-            defaultCurrent={parseInt(getParam('page'), 10)}
+            defaultCurrent={parseInt(1, 10)}
             total={this.state.allCount}
             onChange={this.onChange}
           />

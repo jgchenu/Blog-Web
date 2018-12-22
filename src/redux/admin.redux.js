@@ -1,4 +1,4 @@
-import axios from "@/axios/index";
+import api from '@/lib/api'
 import {
     message
 } from "antd";
@@ -12,7 +12,7 @@ const initState = {
 };
 
 //action type
-//更新个人信息
+//更新博主信息
 function infoAdminData(data) {
     return {
         type: LOAD_DATA,
@@ -36,18 +36,14 @@ export function admin(state = initState, action) {
 }
 
 
-//获取个人信息
+//获取博主的相关信息
 export function getAdminInfo() {
-    return dispatch => {
-        axios({
-            url: "/admin",
-            method: "get"
-        }).then(res => {
-            if (res.data.code === 200) {
-                dispatch(infoAdminData(res.data.data));
-            } else {
-                message.warn(res.data.message, 1);
-            }
-        });
+    return async (dispatch) => {
+        const res = await api.getAdminInfo();
+        if (res.data.code === 0) {
+            dispatch(infoAdminData(res.data.data));
+        } else {
+            message.warn(res.data.message, 1);
+        }
     };
 }

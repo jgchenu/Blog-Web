@@ -6,7 +6,7 @@ class User extends React.Component {
     return (
       <div>
         <div
-          className="personMessage"
+          className="page-aboutme"
           dangerouslySetInnerHTML={{ __html: this.props.introduction }}
         />
       </div>

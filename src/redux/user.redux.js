@@ -1,4 +1,4 @@
-import axios from "@/axios/index";
+import api from '@/lib/api'
 import {
   message
 } from "antd";
@@ -37,7 +37,7 @@ export function user(state = initState, action) {
 export function login(data) {
   message.success(data.message, 1);
   localStorage.setItem("token", data.token);
-  localStorage.setItem("token_exp", Date.now()+24*60*60*1000);
+  localStorage.setItem("token_exp", Date.now() + 24 * 60 * 60 * 1000);
   return infoData(data)
 }
 //登出清除
@@ -50,17 +50,13 @@ export function logout() {
 }
 //获取个人信息
 export function getInfo() {
-  return dispatch => {
-    axios({
-      url: "/user/info",
-      methods: "get"
-    }).then(res => {
-      if (res.data.code === 200) {
-        dispatch(infoData(res.data.data));
-      } else {
-        message.warn(res.data.message, 1);
-      }
-    });
+  return async (dispatch) => {
+    const res = await api.userInfo();
+    if (res.data.code === 0) {
+      dispatch(infoData(res.data.data));
+    } else {
+      message.warn(res.data.message, 1);
+    }
   };
 }
 //更新用户信息

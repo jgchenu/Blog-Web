@@ -5,12 +5,12 @@ class Archive extends React.Component {
   state = {
     tags: []
   }
-  componentWillMount() {
+  componentDidMount() {
     this.loadData()
   }
   loadData = async () => {
     const res = await api.getTags()
-    if(res.data.code===0){
+    if (res.data.code === 0) {
       this.setState({
         tags: res.data.data
       })

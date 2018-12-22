@@ -1,6 +1,6 @@
 @import "./../../styles/vars.less";
-.navLeft {
-    .avatarCard {
+.components-nav-left {
+    .components-nav-avatar {
         text-align: center;
         height: 128px;
         border-bottom: 1px solid @borderColor;
@@ -8,7 +8,7 @@
         align-items: center;
         flex-direction: column;
         justify-content: center;
-        .avatarImg {
+        .components-nav-avatar-img {
             height: 80px;
             width: 80px;
             border-radius: 50%;
@@ -17,20 +17,23 @@
         }
         @keyframes circle {
             0% {
-                transform: rotate(0deg);
+                transform: scale(1);
+            }
+            50%{
+              transform: scale(1.15);
             }
             100% {
-                transform: rotate(360deg);
+                transform: scale(1);
             }
         }
     }
-    .regLogButton {
+    .components-nav-left-footer {
         height: 60px;
         display: flex;
         align-items: center;
         justify-content: space-around;
     }
-    .loginMessage {
+    .components-nav-logined-avatar {
         text-align: center;
         img {
             width: 40px;
@@ -39,26 +42,26 @@
     }
 }
 
-.loginModel {
+.components-nav-left-modal-login {
     text-align: center;
     max-width: 300px;
-    .avatar-uploader {
+    .components-nav-left-modal-login-uploader {
         display: inline-block;
-        .ant-upload {
+        .components-nav-left-modal-login-uploader-img {
             width: 128px;
             height: 128px;
         }
     }
-    .login-form {
+    .components-nav-left-modal-login-form {
         max-width: 300px;
     }
-    .login-form-button {
+    .components-nav-left-modal-login-form-button {
         width: 100%;
     }
 }
-
-.left:hover {
-    .avatarImg {
+//当悬浮在左边菜单的时候，
+.components-nav-left:hover {
+    .components-nav-avatar-img {
         box-shadow: 0 0 10px #bbbbbb;
         animation: circle 1.5s infinite linear;
         transform: rotate(180deg);

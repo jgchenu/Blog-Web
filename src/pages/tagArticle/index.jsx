@@ -1,19 +1,17 @@
 import React from 'react'
-import './index.less'
 import MyCard from '@/pages/home/container/myCard'
 import api from '@/lib/api'
 import getParam from '@/lib/getParam'
 import { Pagination } from 'antd'
 import history from '@/router/history'
+import './index.less'
 class Article extends React.Component {
   state = {
     indexList: [],
     allCount: 0,
-    name: this.props.match.params.name,
-    page: 1,
-    pageSize: 10
+    name: this.props.match.params.name
   }
-  componentWillMount() {
+  componentDidMount() {
     this.setState(
       {
         page: getParam('page')
@@ -23,12 +21,12 @@ class Article extends React.Component {
       }
     )
   }
-  loadData = () => {
-    this.getTagArticle()
-  }
-  getTagArticle = async () => {
-    const params = { page: this.state.page, pageSize: this.state.pageSize }
-    const res = await api.getArticlesByTagName(this.state.name, params)
+  loadData = async () => {
+    const params = { page: getParam('page') }
+    const res = await api.getArticlesByTagName({
+      name: encodeURIComponent(this.state.name),
+      params
+    })
     if (res.data.code === 0) {
       this.setState({
         indexList: res.data.data,
@@ -36,7 +34,6 @@ class Article extends React.Component {
       })
     }
   }
-
   onChange = page => {
     document.scrollingElement.scrollTop = 0
     history.push(`/tagArticle/${this.state.name}?page=${page}`)
@@ -51,15 +48,15 @@ class Article extends React.Component {
   }
   render() {
     return (
-      <div className="home">
-        <div className="lists">
+      <div className="page-tag-article">
+        <div className="page-tag-article-lists">
           {this.state.indexList.map((item, index) => (
             <MyCard list={item} key={index} />
           ))}
         </div>
-        <div className="footer">
+        <div className="page-tag-article-footer">
           <Pagination
-            defaultCurrent={parseInt(this.state.page, 10)}
+            defaultCurrent={parseInt(getParam('page'), 10)}
             total={this.state.allCount}
             onChange={this.onChange}
           />

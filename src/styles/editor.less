@@ -26,6 +26,9 @@ blockquote {
     line-height: 1.4;
     font-size: 100%;
     background-color: #f1f1f1;
+    &::-webkit-scrollbar {
+        width: 0 !important;
+    }
 }
 
 /* code 样式 */
@@ -39,20 +42,32 @@ code {
     padding: 3px 5px;
     margin: 0 3px;
     font-size: 13px;
+    &::-webkit-scrollbar {
+        width: 0 !important;
+    }
 }
 
 pre {
     &:extend(code);
     display: block !important;
     overflow: scroll !important;
-    &::-webkit-scrollbar { width: 0 !important }
+    &::-webkit-scrollbar {
+        width: 0 !important;
+    }
 }
-figure{
+
+figure {
     overflow: scroll !important;
-    &::-webkit-scrollbar { width: 0 !important }
+    &::-webkit-scrollbar {
+        width: 0 !important;
+    }
 }
+
 pre code {
     display: block;
+    &::-webkit-scrollbar {
+        width: 0 !important;
+    }
 }
 
 /* ul ol 样式 */

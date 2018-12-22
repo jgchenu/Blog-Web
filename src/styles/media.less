@@ -13,23 +13,14 @@
             display: block;
           }
         .app-container-left-show {
-            animation: show linear .3s;
+            transition: all linear .3s;
+            transform: translate(0, 0);
+            opacity: 1;
         }
         .app-container-left-hide{
-            // animation: hide linear .4s !important;
             transition: all linear .3s;
             transform: translate(100%, 0);
             opacity: 0;
-        }
-        @keyframes show {
-            0% {
-                opacity: 0;
-                transform: translate(100%, 0);
-            }
-            100% {
-                opacity: 1;
-                transform: translate(0, 0);
-            }
         }
         .app-container-right {
             .components-moblie-header {

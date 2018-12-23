@@ -17,19 +17,19 @@ class NoMatch extends React.Component {
   render() {
     return (
       <div className="page-not-found">
-        <p className="page-not-found-title">你找到了一个新大陆还未开发</p>
+        <p className="page-not-found-title">你找到了一处还未开发的新大陆，先去别处逛逛吧^_^</p>
         <div className="page-not-found-content">
           <Steps direction="vertical">
             <Step
               status="finish"
               title="前往首页"
-              icon={<Icon type="user" />}
+              icon={<Icon type="home" />}
               onClick={this.goHome}
             />
             <Step
               status="finish"
               title="关于我"
-              icon={<Icon type="solution" />}
+              icon={<Icon type="user" />}
               onClick={this.goAboutMe}
 
             />

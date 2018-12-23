@@ -17,7 +17,7 @@
         }
     }
     .components-nav-left-footer {
-        height: 60px;
+        height: 80px;
         display: flex;
         align-items: center;
         justify-content: space-around;
@@ -28,6 +28,22 @@
             width: 40px;
             height: 40px;
         }
+    }
+
+    .components-nav-left-music{
+        position: absolute;
+        left: -40px;
+        top: 0;
+    }
+    .components-nav-left-music-show{
+        transition: all linear .3s;
+        transform: translate(0, 0);
+        opacity: 1;
+    }
+    .components-nav-left-music-hide{
+        transition: all linear .3s;
+        transform: translate(-400px, 0);
+        opacity: 0;
     }
 }
 

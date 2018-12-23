@@ -15,7 +15,7 @@ class App extends React.Component {
       navLeftShow: false
     })
   }
-  handleShowNavLeft=()=>{
+  handleShowNavLeft = () => {
     this.setState({
       navLeftShow: true
     })
@@ -25,27 +25,29 @@ class App extends React.Component {
       <Layout className="app-container">
         <Icon
           type="appstore"
-          theme="twoTone"
+          theme="outlined"
           className="app-container-left-show-button"
           onClick={this.handleShowNavLeft}
           style={{
             fontSize: 30,
             position: 'absolute',
-            right: '2.2rem',
-            top: '2.2rem'
+            right: '36px',
+            top: '36px',
+            opacity: 0.6
           }}
         />
         <Sider
           className={`app-container-left ${
-            this.state.navLeftShow ? 'app-container-left-show' : 'app-container-left-hide'
+            this.state.navLeftShow
+              ? 'app-container-left-show'
+              : 'app-container-left-hide'
           }`}
         >
           <NavLeft onHideNavLeft={this.handleHideNavLeft} />
+
         </Sider>
+
         <Layout className="app-container-right">
-          {/* <div className="components-moblie-header">
-            <MHeader />
-          </div> */}
           <MyHeader />
           <Content className="app-container-right-content">
             {this.props.children}

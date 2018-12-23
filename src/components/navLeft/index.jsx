@@ -30,7 +30,8 @@ class NavLeft extends React.Component {
       introduction: '',
       visible: false,
       status: '',
-      loading: false
+      loading: false,
+      musicShow: false
     }
   }
   componentDidMount() {
@@ -85,7 +86,7 @@ class NavLeft extends React.Component {
     this.props.logout()
   }
   handleClickMenu = ({ key }) => {
-    this.props.onHideNavLeft();
+    this.props.onHideNavLeft()
     history.push(key)
   }
   returnItems = () => {
@@ -122,6 +123,16 @@ class NavLeft extends React.Component {
       }
     }
   }
+  handleShowMusic = () => {
+    this.setState({
+      musicShow:true
+    })
+  }
+  handleHideMusic=()=>{
+    this.setState({
+      musicShow:false
+    })
+  }
   render() {
     const { getFieldDecorator } = this.props.form
     const uploadButton = (
@@ -135,75 +146,115 @@ class NavLeft extends React.Component {
     })
     return (
       <div className="components-nav-left">
-        <div className="components-nav-avatar">
-          <img
-            src={this.props.admin.avatar}
-            alt=""
-            className="components-nav-avatar-img"
-          />
+        <div className="components-nav-left-content">
+          <div className="components-nav-avatar">
+            <img
+              src={this.props.admin.avatar}
+              alt="头像"
+              className="components-nav-avatar-img"
+            />
+            <Icon
+              onClick={this.handleShowMusic}
+              type="customer-service"
+              className="app-container-left-show-music-button"
+              style={{
+                fontSize: 20,
+                position: 'absolute',
+                left: '20px',
+                top: '20px'
+              }}
+            />
+            <Icon
+              onClick={this.props.onHideNavLeft}
+              type="close-circle"
+              className="app-container-left-show-button"
+              style={{
+                fontSize: 30,
+                position: 'absolute',
+                right: '18px',
+                top: '18px'
+              }}
+            />
+          </div>
+          <Menu
+            theme="light"
+            mode="inline"
+            defaultSelectedKeys={[(item && item.path) || '']}
+            onClick={this.handleClickMenu}
+          >
+            {this.returnItems()}
+          </Menu>
+          {this.props.user.avatar ? (
+            <Popover
+              content={
+                <div>
+                  <div onClick={() => this.showModal('editAvatar')}>
+                    <a>更换头像</a>
+                  </div>
+                  <div onClick={this.handleLogout}>
+                    <a>注销</a>
+                  </div>
+                </div>
+              }
+              title={<div>{this.props.user.userName}</div>}
+              trigger="hover"
+              placement="right"
+            >
+              <div className="components-nav-logined-avatar">
+                <span>用户：</span>
+                <img src={this.props.user.avatar} alt="" width={50} />
+              </div>
+            </Popover>
+          ) : (
+            <div className="components-nav-left-footer">
+              <Button
+                type="primary"
+                ghost
+                className="components-nav-left-footer-login"
+                onClick={() => this.showModal('login')}
+              >
+                登录
+              </Button>
+              <Button
+                type="danger"
+                ghost
+                className="components-nav-left-footer-register"
+                onClick={() => this.showModal('register')}
+              >
+                注册
+              </Button>
+            </div>
+          )}
+        </div>
+        <div
+          className={`components-nav-left-music ${
+            this.state.musicShow
+              ? 'components-nav-left-music-show'
+              : 'components-nav-left-music-hide'
+          }`}
+        >
           <Icon
-            onClick={this.props.onHideNavLeft}
+            onClick={this.handleHideMusic}
             type="close-circle"
-            theme="twoTone"
-            className="app-container-left-show-button"
+            className="app-container-left-show-music-button"
             style={{
-              fontSize: 30,
+              fontSize: 20,
               position: 'absolute',
-              right: '.8rem',
-              top: '1.5rem'
+              left: '18px',
+              top: '18px'
             }}
           />
+          <iframe
+            frameBorder="no"
+            border="0"
+            marginWidth="0"
+            marginHeight="0"
+            title="陈建光的火影歌单"
+            width={260}
+            height={500}
+            src="//music.163.com/outchain/player?type=0&id=409631476&auto=1&height=500"
+          />
         </div>
-        <Menu
-          theme="light"
-          mode="inline"
-          defaultSelectedKeys={[(item && item.path) || '']}
-          onClick={this.handleClickMenu}
-        >
-          {this.returnItems()}
-        </Menu>
-        {this.props.user.avatar ? (
-          <Popover
-            content={
-              <div>
-                <div onClick={() => this.showModal('editAvatar')}>
-                  <a>更换头像</a>
-                </div>
-                <div onClick={this.handleLogout}>
-                  <a>注销</a>
-                </div>
-              </div>
-            }
-            title={<div>{this.props.user.userName}</div>}
-            trigger="hover"
-            placement="right"
-          >
-            <div className="components-nav-logined-avatar">
-              <span>读者信息：</span>
-              <img src={this.props.user.avatar} alt="" width={50} />
-            </div>
-          </Popover>
-        ) : (
-          <div className="components-nav-left-footer">
-            <Button
-              type="primary"
-              ghost
-              className="components-nav-left-footer-login"
-              onClick={() => this.showModal('login')}
-            >
-              登录
-            </Button>
-            <Button
-              type="danger"
-              ghost
-              className="components-nav-left-footer-register"
-              onClick={() => this.showModal('register')}
-            >
-              注册
-            </Button>
-          </div>
-        )}
-
         <Modal
           visible={this.state.visible}
           onCancel={this.handleCancel}

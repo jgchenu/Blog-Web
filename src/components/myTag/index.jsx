@@ -21,7 +21,7 @@ class MyTag extends React.Component {
   };
   goTagArticle = name => {
     sessionStorage.setItem("page", 1);
-    history.push(`/admin/tagArticle/${name}`);
+    history.push(`/tagArticle/${name}`);
   };
   renderTags = tags =>
     tags.map((item, index) => (

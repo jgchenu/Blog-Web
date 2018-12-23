@@ -252,7 +252,7 @@ class NavLeft extends React.Component {
             title="陈建光的火影歌单"
             width={260}
             height={500}
-            src="//music.163.com/outchain/player?type=0&id=409631476&auto=1&height=500"
+            src="//music.163.com/outchain/player?type=0&id=409631476&auto=0&height=500"
           />
         </div>
         <Modal

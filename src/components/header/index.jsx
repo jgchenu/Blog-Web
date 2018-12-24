@@ -22,6 +22,19 @@ class MyHeader extends React.Component {
           onClick={this.goBack}
         />
         {item && item.title}
+        <Icon
+          type="appstore"
+          theme="outlined"
+          className="app-container-left-show-button"
+          onClick={this.props.onShowNavLeft}
+          style={{
+            fontSize: 30,
+            position: 'absolute',
+            right: '36px',
+            top: '36px',
+            opacity: 0.6
+          }}
+        />
       </Header>
     )
   }

@@ -23,19 +23,6 @@ class App extends React.Component {
   render() {
     return (
       <Layout className="app-container">
-        <Icon
-          type="appstore"
-          theme="outlined"
-          className="app-container-left-show-button"
-          onClick={this.handleShowNavLeft}
-          style={{
-            fontSize: 30,
-            position: 'absolute',
-            right: '36px',
-            top: '36px',
-            opacity: 0.6
-          }}
-        />
         <Sider
           className={`app-container-left ${
             this.state.navLeftShow
@@ -44,11 +31,9 @@ class App extends React.Component {
           }`}
         >
           <NavLeft onHideNavLeft={this.handleHideNavLeft} />
-
         </Sider>
-
         <Layout className="app-container-right">
-          <MyHeader />
+          <MyHeader onShowNavLeft={this.handleShowNavLeft} />
           <Content className="app-container-right-content">
             {this.props.children}
             <BackTop>

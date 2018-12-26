@@ -26,14 +26,14 @@ export default class MyCard extends React.Component {
     let content = list.content ? list.content.value : "";
     content = content.length > 30 ? content.substring(0, 100) : content;
     return (
-      <div className="myCard" onClick={e => this.goDetail(e, list.id)}>
+      <div className="page-article-card" onClick={e => this.goDetail(e, list.id)}>
         <Card title={list.title} style={{ width: "100%" }}>
           <div
-            className="mycontent"
+            className="page-article-card-content"
             dangerouslySetInnerHTML={{ __html: content }}
           />
-          <footer className="cardFooter">
-            <div className="tags">
+          <footer className="page-article-card-footer">
+            <div className="page-article-card-footer-tags">
               <MyTag tags={list.tags} />
             </div>
           </footer>

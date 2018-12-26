@@ -36,8 +36,8 @@ class Article extends React.Component {
   }
   render() {
     return (
-      <div className="home">
-        <div className="homeSearch">
+      <div className="page-article">
+        <div className="page-article-search">
           <Search
             placeholder="搜索文章"
             size="large"
@@ -45,12 +45,12 @@ class Article extends React.Component {
             enterButton
           />
         </div>
-        <div className="lists">
+        <div className="page-article-content">
           {this.state.indexList.map((item, index) => (
             <MyCard list={item} key={index} />
           ))}
         </div>
-        <div className="footer">
+        <div className="page-article-footer">
           <Pagination
             defaultCurrent={parseInt(getParam('page'), 10)}
             total={this.state.allCount}

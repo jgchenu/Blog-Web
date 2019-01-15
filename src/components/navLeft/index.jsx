@@ -90,7 +90,8 @@ class NavLeft extends React.Component {
     history.push(key)
   }
   returnItems = () => {
-    let routeMenus = routes.slice(0, 5)
+    let sliceLength = routes.length - 2
+    let routeMenus = routes.slice(0, sliceLength)
     return routeMenus.map(item => (
       <Menu.Item key={item.path}>
         <Icon type={item.iconType} />
@@ -125,12 +126,12 @@ class NavLeft extends React.Component {
   }
   handleShowMusic = () => {
     this.setState({
-      musicShow:true
+      musicShow: true
     })
   }
-  handleHideMusic=()=>{
+  handleHideMusic = () => {
     this.setState({
-      musicShow:false
+      musicShow: false
     })
   }
   render() {

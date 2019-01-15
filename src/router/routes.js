@@ -1,33 +1,37 @@
 export default [{
-        path: "/home",
+        path: '/home',
         title: "首页",
         iconType: 'home'
     },
     {
-        path: "/archive",
+        path: '/archive',
         title: "归档",
         iconType: 'hourglass'
     },
     {
-        path: "/tags",
+        path: '/tags',
         title: "标签",
         iconType: 'tags'
     },
     {
-        path: "/aboutMe",
+        path: '/aboutMe',
         title: "关于我",
         iconType: 'user'
     },
     {
-        path: "/messageBoard",
+        path: '/messageBoard',
         title: "留言板",
         iconType: 'edit'
-    }, {
+    },{
+        path:'/friendBoard',
+        title:'友链',
+        iconType:'team'
+    } ,{
         path: '/detail',
         title: '详情'
     },
     {
-        path: "/tagArticle",
+        path: '/tagArticle',
         title: "标签文章",
         iconType: 'hourglass',
     }

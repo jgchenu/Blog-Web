@@ -11,7 +11,7 @@ import NotFound from "@/pages/notFound/index";
 import history from "./history";
 import TagArticle from "@/pages/tagArticle/index";
 import AuthRoute from "@/pages/auth/index";
-
+import FriendBoard from "@/pages/friendBoard/index"
 export default class MyRouter extends React.Component {
   render() {
     return (
@@ -30,6 +30,7 @@ export default class MyRouter extends React.Component {
                   <Route path="/aboutMe" component={AboutMe} />
                   <Route path="/messageBoard" component={MessageBoard} />
                   <Route path="/detail/:id" component={Detail} />
+                  <Route path="/friendBoard" component={FriendBoard} />
                   <Route component={NotFound} />
                 </Switch>
               </App>

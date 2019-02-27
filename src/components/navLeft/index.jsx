@@ -119,7 +119,8 @@ class NavLeft extends React.Component {
       this.setState({
         loading: false
       })
-      if (info.file.response.code === 200) {
+      if (info.file.response.code === 0) {
+        console.log(info.file.response)
         this.props.updateAvatar(info.file.response)
       }
     }
@@ -315,7 +316,7 @@ class NavLeft extends React.Component {
               listType="picture-card"
               className="components-nav-left-modal-login-uploader"
               showUploadList={false}
-              action="/api/user/editAvatar"
+              action="/api/editAvatar"
               headers={{
                 Authorization: 'Bearer ' + localStorage.getItem('token')
               }}

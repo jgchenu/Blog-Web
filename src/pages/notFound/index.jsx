@@ -6,7 +6,7 @@ import './index.less'
 const Step = Steps.Step
 class NoMatch extends React.Component {
   goHome = () => {
-      history.push('/home')
+      history.push('/article')
   }
   goAboutMe=()=>{
     history.push('/aboutMe')

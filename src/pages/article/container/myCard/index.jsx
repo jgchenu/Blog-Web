@@ -20,7 +20,15 @@ export default class MyCard extends React.Component {
     }
     history.push(`/detail/${id}`);
   };
-
+  handleTag=(tag)=>{
+    let arr=(tag&&tag.name&&tag.name.split(','))||[];
+    arr=arr.map(item=>{
+      return {
+        name:item
+      }
+    })
+    return arr;
+  }
   render() {
     let list = this.props.list;
     let content = list.content ? list.content.value : "";
@@ -34,7 +42,7 @@ export default class MyCard extends React.Component {
           />
           <footer className="page-article-card-footer">
             <div className="page-article-card-footer-tags">
-              <MyTag tags={list.tags} />
+              <MyTag tags={this.handleTag(list.tag)} />
             </div>
           </footer>
         </Card>

@@ -26,12 +26,12 @@ class Article extends React.Component {
   }
   onChange = page => {
     document.scrollingElement.scrollTop = 0
-    history.push(`/home/?page=${page}&keyword=${getParam('keyword')}`)
+    history.push(`/article/?page=${page}&keyword=${getParam('keyword')}`)
     this.loadData()
   }
   handleSearch = keyword => {
     document.scrollingElement.scrollTop = 0
-    history.push(`/home/?page=1&keyword=${keyword}`)
+    history.push(`/article/?page=1&keyword=${keyword}`)
     this.loadData()
   }
   render() {

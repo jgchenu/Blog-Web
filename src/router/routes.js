@@ -23,10 +23,6 @@ export default [{
         title: "留言板",
         iconType: 'edit'
     },{
-        path:'/friendBoard',
-        title:'友链',
-        iconType:'team'
-    } ,{
         path: '/detail',
         title: '详情'
     },
@@ -36,3 +32,8 @@ export default [{
         iconType: 'hourglass',
     }
 ]
+// {
+//     path:'/friendBoard',
+//     title:'友链',
+//     iconType:'team'
+// }

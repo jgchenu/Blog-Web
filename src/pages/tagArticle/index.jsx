@@ -1,5 +1,5 @@
 import React from 'react'
-import MyCard from '@/pages/home/container/myCard'
+import MyCard from '@/pages/article/container/myCard'
 import api from '@/lib/api'
 import getParam from '@/lib/getParam'
 import { Pagination } from 'antd'

@@ -31,6 +31,7 @@ class App extends React.Component {
           }`}
         >
           <NavLeft onHideNavLeft={this.handleHideNavLeft} />
+          <div className="app-container-left-beian">粤ICP备17088532号-3</div>
         </Sider>
         <Layout className="app-container-right">
           <MyHeader onShowNavLeft={this.handleShowNavLeft} />
